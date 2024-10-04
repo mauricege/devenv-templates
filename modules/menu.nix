@@ -45,6 +45,28 @@ in {
                     The path to the flake.nix defining the shell's options.
                   '';
                 };
+                generateEnvrcLocal = lib.mkOption {
+                  type = lib.types.bool;
+                  default = false;
+                  description = ''
+                    Whether to generate a .envrc.local file which can be copied to another directory to activate the env from there.
+                  '';
+                };
+                envrcLocal = lib.mkOption {
+                  type = lib.types.path;
+                  readOnly = true;
+                  default = pkgs.writeText ".envrc.local" ''
+                    #!/usr/bin/env bash
+
+                    # We need a separate direnv cache for each compute node
+                    direnv_layout_dir() {
+                        echo "$PWD/.direnv/$(hostname)"
+                    }
+
+                    # adapt with the path to the environment you want to activate
+                    source_env_if_exists ${config.devenv.root}/.envrc
+                  '';
+                };
                 menu = {
                   enable = lib.mkOption {
                     type = lib.types.bool;
@@ -63,16 +85,26 @@ in {
                   };
                   description = lib.mkOption {
                     type = lib.types.lines;
-                    default = ''
-                      This shell is built on [devenv.sh](https://devenv.sh/) which is powered by  [Nix ❄ 😍](https://nixos.org/).
+                    default =
+                      ''
+                        This shell is built on [devenv.sh](https://devenv.sh/) which is powered by  [Nix ❄ 😍](https://nixos.org/).
 
-                      **Workflow**
+                        ## Workflow
 
-                        - ❄ Declarativeley manage system dependencies (and more) in [${config.flakePath}](${config.flakePath})\
-                          &rarr; Check [devenv options](https://devenv.sh/reference/options/) and set them under [devenv.shells.${name}](${config.flakePath})
-                        - 🐍 Install and manage python dependencies with [uv 🚀](https://github.com/astral-sh/uv) (uv add + uv sync)
-                        - [direnv](https://github.com/direnv/direnv) automatically updates your environment whenever .nix or uv.lock change
-                    '';
+                          - ❄ Declarativeley manage system dependencies (and more) in [${config.flakePath}](${config.flakePath})\
+                            &rarr; Check [devenv options](https://devenv.sh/reference/options/) and set them under [devenv.shells.${name}](${config.flakePath})
+                          - 🐍 Install and manage python dependencies with [uv 🚀](https://github.com/astral-sh/uv) (uv add + uv sync)
+                          - [direnv](https://github.com/direnv/direnv) automatically updates your environment whenever .nix or uv.lock change
+                      ''
+                      + (lib.optionalString config.generateEnvrcLocal ''
+                        ## Use this env from another directory
+                        Copy the generated .envrc.local file to /target/directory/.envrc.
+
+                        From within the target directory:
+                        ```bash
+                        cp ${config.devenv.root}/.envrc.local ./.envrc
+                        ```
+                      '');
                     description = ''
                       Markdown description of the development environment printed after the header.
                     '';
@@ -160,7 +192,11 @@ in {
                 };
               };
               config = lib.mkIf config.menu.enable {
-                enterShell = lib.concatStringsSep "\n" [(lib.optionalString config.menu.show "${config.menu.show-cmd}/bin/show-menu") (lib.optionalString config.menu.linkReadmeToRoot "ln -sf ${config.menu.markdown} _README.md")];
+                enterShell = lib.concatStringsSep "\n" [
+                  (lib.optionalString config.menu.show "${config.menu.show-cmd}/bin/show-menu")
+                  (lib.optionalString config.menu.linkReadmeToRoot "ln -sf ${config.menu.markdown} _README.md")
+                  (lib.optionalString config.generateEnvrcLocal "ln -sf ${config.envrcLocal} .envrc.local")
+                ];
               };
             })
           ];
