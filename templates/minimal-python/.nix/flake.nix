@@ -6,6 +6,10 @@
       url = "file+file:///dev/null";
       flake = false;
     };
+    flake-path = {
+      url = "file+file:///dev/null";
+      flake = false;
+    };
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:cachix/devenv-nixpkgs/rolling";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -28,6 +32,7 @@
   outputs = inputs @ {
     flake-parts,
     devenv-root,
+    flake-path,
     ...
   }:
     flake-parts.lib.mkFlake {inherit inputs;} {
@@ -57,6 +62,11 @@
 
         devenv.shells.default = {
           # removes need for impure
+          flakePath = let
+            flakePathFileContent = builtins.readFile flake-path.outPath;
+          in
+            pkgs.lib.mkIf (flakePathFileContent != "") flakePathFileContent;
+
           devenv.root = let
             devenvRootFileContent = builtins.readFile devenv-root.outPath;
           in

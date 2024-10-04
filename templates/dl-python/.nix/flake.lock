@@ -102,11 +102,11 @@
     },
     "devenv-templates": {
       "locked": {
-        "lastModified": 1728028870,
-        "narHash": "sha256-x0K8BnGh4Ur2DAM38869CzxGGlwBklE0tMu1Y3vD4qU=",
+        "lastModified": 1728031876,
+        "narHash": "sha256-ZhF9epH0tkvKkEEkWi1MiqgUIkTyQR6Q2pGVa3c511I=",
         "owner": "mauricege",
         "repo": "devenv-templates",
-        "rev": "ee5f890d6e8d620c86f047e7c0cec8f99f38ed9c",
+        "rev": "84420de1cdd80fd950f21cb8d4aaed74b1f4f604",
         "type": "github"
       },
       "original": {
@@ -308,6 +308,18 @@
         "owner": "hercules-ci",
         "repo": "flake-parts",
         "type": "github"
+      }
+    },
+    "flake-path": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-d6xi4mKdjkX2JFicDIv5niSzpyI0m/Hnm8GGAIU04kY=",
+        "type": "file",
+        "url": "file:///dev/null"
+      },
+      "original": {
+        "type": "file",
+        "url": "file:///dev/null"
       }
     },
     "flake-utils": {
@@ -925,6 +937,7 @@
         "devenv-templates": "devenv-templates",
         "eihw-packages": "eihw-packages",
         "flake-parts": "flake-parts_3",
+        "flake-path": "flake-path",
         "mk-shell-bin": "mk-shell-bin",
         "nix2container": "nix2container",
         "nixpkgs": "nixpkgs_5",
