@@ -73,6 +73,8 @@
             pkgs.lib.mkIf (devenvRootFileContent != "") devenvRootFileContent;
           name = "minimal-python";
 
+          generateEnvrcLocal = true;
+
           menu = {
             enable = true;
             showInstalledPackages = true;

@@ -92,6 +92,8 @@
             pkgs.lib.mkIf (devenvRootFileContent != "") devenvRootFileContent;
           name = "dl-python";
 
+          generateEnvrcLocal = true;
+
           imports = [
             # This is just like the imports in devenv.nix.
             # See https://devenv.sh/guides/using-with-flake-parts/#import-a-devenv-module
