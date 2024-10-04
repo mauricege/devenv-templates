@@ -101,15 +101,12 @@
       }
     },
     "devenv-templates": {
-      "inputs": {
-        "flake-parts": "flake-parts_2"
-      },
       "locked": {
-        "lastModified": 1728027728,
-        "narHash": "sha256-UzAEKYYYzdOzDZI1ySiQnmNjvY5EaGI8AoXOaQyG/ng=",
+        "lastModified": 1728028870,
+        "narHash": "sha256-x0K8BnGh4Ur2DAM38869CzxGGlwBklE0tMu1Y3vD4qU=",
         "owner": "mauricege",
         "repo": "devenv-templates",
-        "rev": "36926bf3d5f366a091ea261374fb482274064981",
+        "rev": "ee5f890d6e8d620c86f047e7c0cec8f99f38ed9c",
         "type": "github"
       },
       "original": {
@@ -260,24 +257,6 @@
     "flake-parts_2": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
-      },
-      "locked": {
-        "lastModified": 1685662779,
-        "narHash": "sha256-cKDDciXGpMEjP1n6HlzKinN0H+oLmNpgeCTzYnsA2po=",
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "rev": "71fb97f0d875fd4de4994dfb849f2c75e17eb6c3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "type": "github"
-      }
-    },
-    "flake-parts_3": {
-      "inputs": {
-        "nixpkgs-lib": "nixpkgs-lib_2"
       },
       "locked": {
         "lastModified": 1727826117,
@@ -565,24 +544,6 @@
     },
     "nixpkgs-lib": {
       "locked": {
-        "dir": "lib",
-        "lastModified": 1685564631,
-        "narHash": "sha256-8ywr3AkblY4++3lIVxmrWZFzac7+f32ZEhH/A8pNscI=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "4f53efe34b3a8877ac923b9350c874e3dcd5dc0a",
-        "type": "github"
-      },
-      "original": {
-        "dir": "lib",
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs-lib_2": {
-      "locked": {
         "lastModified": 1727825735,
         "narHash": "sha256-0xHYkMkeLVQAMa7gvkddbPqpxph+hDzdu1XdGPJR+Os=",
         "type": "tarball",
@@ -821,7 +782,7 @@
         "devenv": "devenv",
         "devenv-root": "devenv-root",
         "devenv-templates": "devenv-templates",
-        "flake-parts": "flake-parts_3",
+        "flake-parts": "flake-parts_2",
         "mk-shell-bin": "mk-shell-bin",
         "nix2container": "nix2container",
         "nixpkgs": "nixpkgs_4",
