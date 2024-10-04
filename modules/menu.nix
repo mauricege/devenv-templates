@@ -38,6 +38,13 @@ in {
               ...
             }: {
               options = {
+                flakePath = lib.mkOption {
+                  type = lib.types.path;
+                  default = "${config.devenv.root}/flake.nix";
+                  description = ''
+                    The path to the flake.nix defining the shell's options.
+                  '';
+                };
                 menu = {
                   enable = lib.mkOption {
                     type = lib.types.bool;
@@ -46,6 +53,7 @@ in {
                       Enable displaying a menu upon entering a devenv shell.
                     '';
                   };
+
                   header = lib.mkOption {
                     type = lib.types.str;
                     default = "# 🚀 ⚡️ Welcome to ${config.name} ❄ 🐍";
@@ -60,8 +68,8 @@ in {
 
                       **Workflow**
 
-                        - ❄ Declarativeley manage system dependencies (and more) in [.nix/flake.nix](.nix/flake.nix)\
-                          &rarr; Check [devenv options](https://devenv.sh/reference/options/) and set them under [devenv.shells.${name}](.nix/flake.nix)
+                        - ❄ Declarativeley manage system dependencies (and more) in [${config.flakePath}](${config.flakePath})\
+                          &rarr; Check [devenv options](https://devenv.sh/reference/options/) and set them under [devenv.shells.${name}](${config.flakePath})
                         - 🐍 Install and manage python dependencies with [uv 🚀](https://github.com/astral-sh/uv) (uv add + uv sync)
                         - [direnv](https://github.com/direnv/direnv) automatically updates your environment whenever .nix or uv.lock change
                     '';
@@ -116,7 +124,7 @@ in {
                         table.add_column("Hook")
                         table.add_column("Description")
                         ${lib.concatStringsSep "\n" (lib.mapAttrsToList precommitInfo (enabledPreCommitHooks preCommitHooks))}
-                        console.print(Panel(table, title="Enabled Pre-commit Hooks", subtitle="[link]${config.devenv.root}/.nix/flake.nix[/link]: [bold italic]devenv.shells.${name}.pre-commit.hooks[/bold italic]", expand=True))'';
+                        console.print(Panel(table, title="Enabled Pre-commit Hooks", subtitle="[link]${config.flakePath}[/link]: [bold italic]devenv.shells.${name}.pre-commit.hooks[/bold italic]", expand=True))'';
                       packageTable = packages: ''
                         from rich.table import Table
                         import rich.box as box
@@ -126,7 +134,7 @@ in {
                         table.add_column("Version")
                         table.add_column("Description")
                         ${lib.concatStringsSep "\n" (lib.unique (map packageInfo packages))}
-                        console.print(Panel(table, title="Installed Packages", subtitle="[link]${config.devenv.root}/.nix/flake.nix[/link]: [bold italic]devenv.shells.${name}.packages[/bold italic]", expand=True))'';
+                        console.print(Panel(table, title="Installed Packages", subtitle="[link]${config.flakePath}[/link]: [bold italic]devenv.shells.${name}.packages[/bold italic]", expand=True))'';
                     in
                       pkgs.writers.writePython3Bin "show-menu" {
                         libraries = [pkgs.python3Packages.rich];
