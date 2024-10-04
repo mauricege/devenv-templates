@@ -1,0 +1,32 @@
+[project]
+name = "DeepLearningGPU"
+version = "0.1.0"
+description = "DeepLearningGPU shell via devenv"
+requires-python = ">=3.11"
+authors = ["Your Name <you@example.com>"]
+dependencies = [
+    "dvc",
+    "einops",
+    "einx",
+    "librosa",
+    "lightgbm",
+    "llvmlite",
+    "numba",
+    "pandas",
+    "pytorch-lightning",
+    "rich",
+    "scikit-learn",
+    "seaborn",
+    "spacy",
+    "torch",
+    "torchaudio",
+    "torchvision",
+    "transformers",
+    "xgboost",
+    "tensorboard",
+    "autrainer",
+]
+
+
+[tool.uv]
+dev-dependencies = ["ruff"]
