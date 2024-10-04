@@ -195,7 +195,7 @@ in {
                 enterShell = lib.concatStringsSep "\n" [
                   (lib.optionalString config.menu.show "${config.menu.show-cmd}/bin/show-menu")
                   (lib.optionalString config.menu.linkReadmeToRoot "ln -sf ${config.menu.markdown} _README.md")
-                  (lib.optionalString config.generateEnvrcLocal "cp ${config.envrcLocal} ${config.devenv.root}/.envrc.local && chmod u+w")
+                  (lib.optionalString config.generateEnvrcLocal "cp -f ${config.envrcLocal} ${config.devenv.root}/.envrc.local 2>/dev/null && chmod u+w")
                 ];
               };
             })
