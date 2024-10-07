@@ -126,6 +126,7 @@
               zlib
             ];
           };
+
           # See https://devenv.sh/reference/options/#pre-commithooks for options
           pre-commit.hooks = {
             alejandra.enable = true; # nix formatter
@@ -134,6 +135,10 @@
           };
           scripts = {
             reinstall-venv.exec = "rm -rf $DEVENV_ROOT/.venv $DEVENV_ROOT/.direnv $DEVENV_ROOT/.devenv && direnv reload";
+          };
+          # Bug in devenv https://github.com/cachix/devenv/issues/1502
+          tasks = {
+            "devenv:python:uv".exports = lib.mkForce ["VIRTUAL_ENV"];
           };
         };
       };
