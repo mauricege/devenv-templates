@@ -125,10 +125,6 @@
               description = "Wipe any state that might have accumulated - useful for reinstalling python dependencies.";
             };
           };
-          # Bug in devenv https://github.com/cachix/devenv/issues/1502
-          tasks = {
-            "devenv:python:uv".exports = lib.mkForce ["VIRTUAL_ENV"];
-          };
         };
       };
       flake = {
