@@ -156,7 +156,7 @@ in {
                         table.add_column("Hook")
                         table.add_column("Description")
                         ${lib.concatStringsSep "\n" (lib.mapAttrsToList precommitInfo (enabledPreCommitHooks preCommitHooks))}
-                        console.print(Panel(table, title="Enabled Pre-commit Hooks", subtitle="[link]${config.flakePath}[/link]: [bold italic]devenv.shells.${name}.pre-commit.hooks[/bold italic]", expand=True))'';
+                        console.print(Panel(table, title="Enabled Pre-commit Hooks", subtitle="[link=file://${config.flakePath}]${config.flakePath}[/link=file://${config.flakePath}]: [bold italic]devenv.shells.${name}.pre-commit.hooks[/bold italic]", expand=True))'';
                       packageTable = packages: ''
                         from rich.table import Table
                         import rich.box as box
@@ -166,7 +166,7 @@ in {
                         table.add_column("Version")
                         table.add_column("Description")
                         ${lib.concatStringsSep "\n" (lib.unique (map packageInfo packages))}
-                        console.print(Panel(table, title="Installed Packages", subtitle="[link]${config.flakePath}[/link]: [bold italic]devenv.shells.${name}.packages[/bold italic]", expand=True))'';
+                        console.print(Panel(table, title="Installed Packages", subtitle="[link=file://${config.flakePath}]${config.flakePath}[/link=file://${config.flakePath}]: [bold italic]devenv.shells.${name}.packages[/bold italic]", expand=True))'';
                     in
                       pkgs.writers.writePython3Bin "show-menu" {
                         libraries = [pkgs.python3Packages.rich];
