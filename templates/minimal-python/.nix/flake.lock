@@ -102,11 +102,11 @@
     },
     "devenv-templates": {
       "locked": {
-        "lastModified": 1728036709,
-        "narHash": "sha256-TpfEj2UStPNbQuK2N1zeCLH7HhoJs3RF6kfG9cPLPjM=",
+        "lastModified": 1728477117,
+        "narHash": "sha256-c3S8XwvTt426X++BhMoswZ8Y45kqX20YRltTdYJIXIY=",
         "owner": "mauricege",
         "repo": "devenv-templates",
-        "rev": "54d707edec967fa6bf964b84812db516f8da716c",
+        "rev": "498da34d813f554545e860638d1eec967a46af3b",
         "type": "github"
       },
       "original": {
