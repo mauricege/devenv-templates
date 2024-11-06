@@ -16,7 +16,6 @@
     nix2container.url = "github:nlewo/nix2container";
     nix2container.inputs.nixpkgs.follows = "nixpkgs";
     mk-shell-bin.url = "github:rrbutani/nix-mk-shell-bin";
-    eihw-packages.url = "git+https://git.rz.uni-augsburg.de/gerczuma/eihw-packages?ref=main";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-python = {
       url = "github:cachix/nixpkgs-python";
